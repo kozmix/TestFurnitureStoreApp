@@ -1,0 +1,38 @@
+<div class="alert alert-success" *ngIf="successMsg">
+  <p>Customer Added</p>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMsg">
+  <p>Customer with same name exists, choose another!</p>
+</div>
+
+<h1 class="page-title">Add a New Customer</h1>
+<a class="btn btn-primary" href="customers">Back to Customers</a>
+
+<form novalidate #f="ngForm" (ngSubmit)="addCustomer(f)">
+    <div class="form-group">
+      <label for="">Customer Name:</label>
+      <input type="text" class="form-control" placeholder="Customer Name" name="name" [(ngModel)]="name" #customerName="ngModel" minlength="3"
+        required>
+    </div>
+    <div class="alert alert-danger" *ngIf="customerName.errors?.required && customerName.touched">
+      Customer Name is required.
+    </div>
+    <div class="alert alert-danger" *ngIf="customerName.errors?.minlength && customerName.touched">
+      Minimum length is 3.
+    </div>
+  
+    <div class="form-group">
+      <label for="">Customer Since:</label>
+      <input type="date" class="form-control" placeholder="Date" name="dateOfFirstPurchase" [(ngModel)]="dateOfFirstPurchase" #productPrice="ngModel">
+    </div>
+  
+    <div class="form-group">
+      <label for="">Premium Client:</label>
+      <input type="checkbox" name="isPremium" [(ngModel)]="isPremium">
+    </div>
+  
+    <div class="form-group">
+      <button class="btn btn-default" [disabled]="!f.valid">Add Customer</button>
+    </div>
+  </form>

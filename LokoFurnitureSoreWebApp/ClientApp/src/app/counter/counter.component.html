@@ -1,0 +1,35 @@
+<h1>Counter</h1>
+
+<p>This is the page where the Furniture Store Admin can calculate the Rebate for a Order</p>
+
+<p>Total Order Price : <strong>{{ totalPrice }}</strong></p>
+<p>Current Rebate: <strong>{{ currentRebate }}</strong></p>
+
+
+<!--<button (click)="incrementCounter()">Increment</button>-->
+<form novalidate #f="ngForm" (ngSubmit)="calculateDiscount(f)">  
+    <div class="form-group">
+      <label for="">Select Customer:</label>
+      <select name="selectedCustomer" [ngModel]="selectedCustomer">
+        <option *ngFor="let customer of customers" [ngValue]="customer.Id">{{ customer.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+        <label for="">Select Product:</label>
+        <select name="selectedProduct" [(ngModel)]="selectedProduct" (change)="filterProducts($event.target.value)">
+          <option *ngFor="let product of products" [value]="product.Id">{{ product.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="">Product Quantity:</label>
+        <input type="number" class="form-control" name="price" [(ngModel)]="selectedQuantity" #productPrice="ngModel"
+          required>
+          <div class="alert alert-danger" *ngIf="productPrice.errors?.required && productPrice.touched">
+            Quantity is required.
+          </div>
+      </div>
+  
+    <div class="form-group">
+      <button class="btn btn-default" [disabled]="!f.valid">Calculate Discount</button>
+    </div>
+  </form>

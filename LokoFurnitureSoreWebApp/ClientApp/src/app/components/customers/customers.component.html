@@ -1,0 +1,26 @@
+<h1>Customers</h1>
+
+<p *ngIf="!customers"><em>Loading...</em></p>
+<a href="add-customer">New Product</a>
+<br><br>
+
+<table class='table' *ngIf="customers">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Premium Customer</th>
+      <th>Date of First Purchase</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers?.value">
+      <td>{{ customer.name }}</td>
+      <td>{{ customer.isPremium }}</td>
+      <td>{{ customer.dateOfFirstPurchase }}</td>
+      <td><a href="">Edit</a></td>
+      <td><a href="">Delete</a></td>
+    </tr>
+  </tbody>
+</table>

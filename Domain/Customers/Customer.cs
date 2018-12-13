@@ -1,0 +1,35 @@
+﻿using Domain.Common;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Domain.Customers
+{
+    public class Customer : IEntity
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public bool IsPremium { get; set; }
+
+        public DateTime? DateOfFirstPurchase { get; set; }
+
+        public static implicit operator Customer(global::FurnitureStoreWebApp.Models.Customer v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static implicit operator Customer(global::FurnitureStoreWebApp.Models.Customer v)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static implicit operator Customer(global::FurnitureStoreWebApp.Models.Customer v)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
