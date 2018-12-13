@@ -16,20 +16,5 @@ namespace Domain.Customers
         public bool IsPremium { get; set; }
 
         public DateTime? DateOfFirstPurchase { get; set; }
-
-        public static implicit operator Customer(global::FurnitureStoreWebApp.Models.Customer v)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static implicit operator Customer(global::FurnitureStoreWebApp.Models.Customer v)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static implicit operator Customer(global::FurnitureStoreWebApp.Models.Customer v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

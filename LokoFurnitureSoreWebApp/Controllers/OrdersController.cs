@@ -38,24 +38,22 @@ namespace LokoFurnitureSoreWebApp.Controllers
             Customer selectedCustomer = _customerRepository.GetEntity(newOrder.CustomerId);
             Product selectedProduct = _productRepository.GetEntity(newOrder.ProductId);
             
-            if (!selectedCustomer.)
+            if (!_customerRepository.EntityExists(selectedCustomer.Name))
             {
                 return BadRequest(ModelState);
             }
 
-            if (!selectedProduct.IsValid)
+            if (!_productRepository.EntityExists(selectedProduct.Name))
             {
                 return BadRequest(ModelState);
             }
 
-            Order order = new Order();
-            order.Customer = selectedCustomer;
-            order.Product = selectedProduct;
-            order.Date = DateTime.Now;
-            order.Quantity = newOrder.Quantity;
-            order.UnitPrice = selectedProduct.Price;
-
-
+            //Order order = new Order();
+            //order.Customer = selectedCustomer;
+            //order.Product = selectedProduct;
+            //order.Date = DateTime.Now;
+            //order.Quantity = newOrder.Quantity;
+            //order.UnitPrice = selectedProduct.Price;
 
             //if (!ModelState.IsValid)
             //{

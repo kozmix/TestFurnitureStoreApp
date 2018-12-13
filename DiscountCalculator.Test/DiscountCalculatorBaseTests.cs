@@ -68,7 +68,7 @@ namespace DiscountCalculator.Test
 
         //    decimal discount = _calculator.CalculateDiscountPercentage(customer);
 
-        //    Assert.AreEqual(0.10m, discount);
+        //   Assert.AreEqual(0.10m, discount);
         //}
 
         //[Test]
@@ -90,6 +90,5 @@ namespace DiscountCalculator.Test
 
         //    Assert.AreEqual(0.22m, discount);
         //}
-
     }
 }

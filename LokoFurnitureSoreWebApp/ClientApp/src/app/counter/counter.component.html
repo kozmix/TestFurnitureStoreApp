@@ -16,7 +16,7 @@
     </div>
     <div class="form-group">
         <label for="">Select Product:</label>
-        <select name="selectedProduct" [(ngModel)]="selectedProduct" (change)="filterProducts($event.target.value)">
+        <select name="selectedProduct" [(ngModel)]="selectedProduct">
           <option *ngFor="let product of products" [value]="product.Id">{{ product.name }}</option>
         </select>
       </div>
