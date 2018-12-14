@@ -23,7 +23,7 @@ namespace DiscountCalculator.Test
         }
 
         [Test]
-        public void Return15PctForNewCustomer()
+        public void Return07ForFirsTimeCustomer()
         {
             var customerOrder = new Order();
             _customer = new Customer();
@@ -37,58 +37,133 @@ namespace DiscountCalculator.Test
             Assert.AreEqual(0.07m, discount);
         }
 
-        //[Test]
-        //public void Return10PctForVeteran()
-        //{
-        //    var customer = new Customer() { IsVeteran = true, DateOfFirstPurchase = DateTime.Today.AddDays(-1) };
+        [Test]
+        public void Return02ForProductOnSale()
+        {
+            var customerOrder = new Order();
+            _customer = new Customer();
+            _product = new Product() { OnSale = true };
 
-        //    decimal discount = _calculator.CalculateDiscountPercentage(customer);
+            customerOrder.Customer = _customer;
+            customerOrder.Product = _product;            
 
-        //    Assert.AreEqual(0.1m, discount);
-        //}
+            decimal discount = _calculator.CalculateDiscountPercentage(customerOrder);
 
-        //[Test]
-        //public void Return5PctForSenior()
-        //{
-        //    var customer = new Customer() { DateOfBirth = DateTime.Today.AddYears(-65).AddDays(-5), DateOfFirstPurchase = DateTime.Today.AddDays(-1) };
+            Assert.AreEqual(0.2m, discount);
+        }
 
-        //    decimal discount = _calculator.CalculateDiscountPercentage(customer);
+        [Test]
+        public void Return08ForPremiumCustomer()
+        {
+            var customerOrder = new Order();
+            _customer = new Customer() { IsPremium = true };
+            _product = new Product();
 
-        //    Assert.AreEqual(0.05m, discount);
-        //}
+            customerOrder.Customer = _customer;
+            customerOrder.Product = _product;
 
-        //[Test]
-        //public void Return10PctForBirthday()
-        //{
-        //    var customer = new Customer()
-        //    {
-        //        DateOfBirth = DateTime.Today,
-        //        DateOfFirstPurchase = DateTime.Today.AddDays(-1)
-        //    };
+            decimal discount = _calculator.CalculateDiscountPercentage(customerOrder);
 
-        //    decimal discount = _calculator.CalculateDiscountPercentage(customer);
+            Assert.AreEqual(0.08m, discount);
+        }
 
-        //   Assert.AreEqual(0.10m, discount);
-        //}
+        [Test]
+        public void Return12PctFor6Products()
+        {
+            var customerOrder = new Order();
+            _customer = new Customer();
+            _product = new Product();
 
-        //[Test]
-        //public void Return12PctFor5YearLoyalCustomer()
-        //{
-        //    var customer = new Customer() { DateOfBirth = DateTime.Today.AddDays(-5), DateOfFirstPurchase = DateTime.Today.AddYears(-5) };
+            customerOrder.Customer = _customer;
+            customerOrder.Product = _product;
+            customerOrder.Quantity = 6;
 
-        //    decimal discount = _calculator.CalculateDiscountPercentage(customer);
+            decimal discount = _calculator.CalculateDiscountPercentage(customerOrder);
 
-        //    Assert.AreEqual(0.12m, discount);
-        //}
+            Assert.AreEqual(0.12m, discount);
+        }
 
-        //[Test]
-        //public void Return22PctFor5YearLoyalCustomerOnBirthday()
-        //{
-        //    var customer = new Customer() { DateOfBirth = DateTime.Today, DateOfFirstPurchase = DateTime.Today.AddYears(-5) };
+        [Test]
+        public void Return17PctFor12Products()
+        {
+            var customerOrder = new Order();
+            _customer = new Customer();
+            _product = new Product();
 
-        //    decimal discount = _calculator.CalculateDiscountPercentage(customer);
+            customerOrder.Customer = _customer;
+            customerOrder.Product = _product;
+            customerOrder.Quantity = 12;
 
-        //    Assert.AreEqual(0.22m, discount);
-        //}
+            decimal discount = _calculator.CalculateDiscountPercentage(customerOrder);
+
+            Assert.AreEqual(0.17m, discount);
+        }
+
+        [Test]
+        public void Return22PctFor21Products()
+        {
+            var customerOrder = new Order();
+            _customer = new Customer();
+            _product = new Product();
+
+            customerOrder.Customer = _customer;
+            customerOrder.Product = _product;
+            customerOrder.Quantity = 21;
+
+            decimal discount = _calculator.CalculateDiscountPercentage(customerOrder);
+
+            Assert.AreEqual(0.22m, discount);
+        }
+
+        [Test]
+        public void Return10PctForOrderOver500()
+        {
+            var customerOrder = new Order();
+            _customer = new Customer();
+            _product = new Product();
+
+            customerOrder.Customer = _customer;
+            customerOrder.Product = _product;
+            customerOrder.UnitPrice = 200;
+            customerOrder.Quantity = 3;
+
+            decimal discount = _calculator.CalculateDiscountPercentage(customerOrder);
+
+            Assert.AreEqual(0.10m, discount);
+        }
+
+        [Test]
+        public void Return15PctForOrderOver1000()
+        {
+            var customerOrder = new Order();
+            _customer = new Customer();
+            _product = new Product();
+
+            customerOrder.Customer = _customer;
+            customerOrder.Product = _product;
+            customerOrder.UnitPrice = 250;
+            customerOrder.Quantity = 5;
+
+            decimal discount = _calculator.CalculateDiscountPercentage(customerOrder);
+
+            Assert.AreEqual(0.15m, discount);
+        }
+
+        [Test]
+        public void Return25PctForOrderOver2000()
+        {
+            var customerOrder = new Order();
+            _customer = new Customer();
+            _product = new Product();
+
+            customerOrder.Customer = _customer;
+            customerOrder.Product = _product;
+            customerOrder.UnitPrice = 300;
+            customerOrder.Quantity = 7;
+
+            decimal discount = _calculator.CalculateDiscountPercentage(customerOrder);
+
+            Assert.AreEqual(0.25m, discount);
+        }
     }
 }
