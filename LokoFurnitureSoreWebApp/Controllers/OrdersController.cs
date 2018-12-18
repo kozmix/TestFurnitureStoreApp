@@ -37,41 +37,48 @@ namespace LokoFurnitureSoreWebApp.Controllers
 
             Customer selectedCustomer = _customerRepository.GetEntity(newOrder.CustomerId);
             Product selectedProduct = _productRepository.GetEntity(newOrder.ProductId);
-            
-            if (!_customerRepository.EntityExists(selectedCustomer.Name))
+
+            if (selectedCustomer == null)
             {
                 return BadRequest(ModelState);
             }
 
-            if (!_productRepository.EntityExists(selectedProduct.Name))
+            if (selectedProduct == null)
             {
                 return BadRequest(ModelState);
             }
 
-            //Order order = new Order();
-            //order.Customer = selectedCustomer;
-            //order.Product = selectedProduct;
-            //order.Date = DateTime.Now;
-            //order.Quantity = newOrder.Quantity;
-            //order.UnitPrice = selectedProduct.Price;
+            // Here we should use a Mapper between two similar or almost similar models. For the moment it's done by hand.
+            Domain.Products.Product mappedProduct = new Domain.Products.Product()
+            {
+                Id = selectedProduct.Id,
+                Name = selectedProduct.Name,
+                Price = selectedProduct.Price,
+                OnSale = selectedProduct.OnSale
 
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
+            };
 
-            //if (_productRepository.EntityExists(newProduct.Name))
-            //{
-            //    return new JsonResult("productExists");
-            //}
+            Domain.Customers.Customer mappedCustomer = new Domain.Customers.Customer()
+            {
+                Id = selectedProduct.Id,
+                Name = selectedProduct.Name,
+                IsPremium = selectedCustomer.IsPremium,
+                DateOfFirstPurchase = selectedCustomer.DateOfFirstPurchase
+            };
 
-            //_productRepository.AddEntity(newProduct);
-            //if (!_productRepository.Save())
-            //{
-            //    return StatusCode(500, "A problem happened while handling your request.");
-            //}
+            Order order = new Order()
+            {
+                Product = mappedProduct,
+                Customer = mappedCustomer,
+                Quantity = newOrder.Quantity,
+                UnitPrice = mappedProduct.Price
+            };
 
-            return Ok(newOrder);
+            var resultDiscount = _discountCalculator.CalculateDiscountPercentage(order);
+            var returnedValue = new JsonResult(resultDiscount);
+            // return new JsonResult(resultDiscount)
+
+            return Ok(resultDiscount);
         }
     }
 }
